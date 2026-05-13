@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maintenance Work Orders</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="app__header">
+        <h1>Maintenance Work Orders</h1>
+        <p class="subtitle">Mobile field view · Dark mode</p>
+      </header>
+
+      <section class="panel" aria-labelledby="create-order-title">
+        <h2 id="create-order-title">Create Work Order</h2>
+        <form id="workOrderForm" class="form">
+          <label>
+            Issue Title
+            <input id="title" name="title" type="text" placeholder="Leaking kitchen sink" required />
+          </label>
+
+          <label>
+            Apartment Number
+            <input id="apartment" name="apartment" type="text" placeholder="B-204" required />
+          </label>
+
+          <label>
+            Priority
+            <select id="priority" name="priority" required>
+              <option value="low">Low</option>
+              <option value="medium" selected>Medium</option>
+              <option value="emergency">Emergency</option>
+            </select>
+          </label>
+
+          <label>
+            Notes
+            <textarea id="notes" name="notes" rows="3" placeholder="Describe issue details"></textarea>
+          </label>
+
+          <label class="file-label">
+            Upload Photo
+            <input id="photo" name="photo" type="file" accept="image/*" />
+          </label>
+
+          <button class="btn btn--primary" type="submit">Create Work Order</button>
+        </form>
+      </section>
+
+      <section class="panel" aria-labelledby="active-orders-title">
+        <h2 id="active-orders-title">Active Work Orders</h2>
+        <div id="ordersList" class="orders-list" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <template id="orderTemplate">
+      <article class="order-card">
+        <div class="order-card__top">
+          <h3 class="order-title"></h3>
+          <span class="priority-badge"></span>
+        </div>
+        <p class="order-apartment"></p>
+        <p class="order-notes"></p>
+        <p class="order-photo"></p>
+
+        <form class="quick-note-form">
+          <label>
+            Add Note
+            <textarea class="quick-note-input" rows="2" placeholder="Add update while on site"></textarea>
+          </label>
+          <button class="btn" type="submit">Save Note</button>
+        </form>
+
+        <ul class="notes-list"></ul>
+
+        <button class="btn btn--success complete-btn" type="button">Mark Complete</button>
+      </article>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
