@@ -10,6 +10,26 @@
     <main class="app">
       <header class="app__header">
         <h1>Maintenance Work Orders</h1>
+        <p class="subtitle">Phase 1.1 · Mobile field prototype</p>
+      </header>
+
+      <section class="panel" aria-labelledby="create-order-title">
+        <h2 id="create-order-title">Work Order Details</h2>
+        <form id="workOrderForm" class="form">
+          <input id="recordId" name="recordId" type="hidden" />
+
+          <label>Work Order ID <input id="workOrderId" name="workOrderId" type="text" required /></label>
+          <label>Property Number <input id="propertyNumber" name="propertyNumber" type="text" required /></label>
+          <label>Property Name <input id="propertyName" name="propertyName" type="text" required /></label>
+          <label>Property Address <input id="propertyAddress" name="propertyAddress" type="text" required /></label>
+          <label>Unit Number <input id="unitNumber" name="unitNumber" type="text" required /></label>
+
+          <label>
+            Status
+            <select id="status" name="status" required>
+              <option>New</option><option>In Progress</option><option>Scheduled</option><option>On Hold</option>
+              <option>Parts Ordered</option><option>Reassigned</option><option>Canceled</option><option>Completed</option>
+            </select>
         <p class="subtitle">Mobile field view · Dark mode</p>
       </header>
 
@@ -29,6 +49,29 @@
           <label>
             Priority
             <select id="priority" name="priority" required>
+              <option>Scheduled</option><option>Urgent</option><option>Resident</option><option>Turn</option>
+            </select>
+          </label>
+
+          <label>Category <input id="category" name="category" type="text" required /></label>
+          <label>Subcategory <input id="subcategory" name="subcategory" type="text" required /></label>
+          <label>Brief Description <input id="briefDescription" name="briefDescription" type="text" required /></label>
+          <label>Full Description <textarea id="fullDescription" name="fullDescription" rows="3" required></textarea></label>
+          <label>Tech Notes <textarea id="techNotes" name="techNotes" rows="3"></textarea></label>
+          <label>Assigned Technician <input id="assignedTechnician" name="assignedTechnician" type="text" required /></label>
+          <label>Created Date/Time <input id="createdDateTime" name="createdDateTime" type="text" readonly /></label>
+          <label>Actual Start Date/Time <input id="actualStartDateTime" name="actualStartDateTime" type="text" readonly /></label>
+          <label>Actual Finish Date/Time <input id="actualFinishDateTime" name="actualFinishDateTime" type="text" readonly /></label>
+          <label>Total Labor Hours <input id="totalLaborHours" name="totalLaborHours" type="text" readonly /></label>
+
+          <label class="file-label">Upload Photo <input id="photo" name="photo" type="file" accept="image/*" /></label>
+
+          <div class="button-row">
+            <button class="btn btn--primary" type="submit">Save Work Order</button>
+            <button class="btn" id="startWorkBtn" type="button">Start Work</button>
+            <button class="btn btn--success" id="completeWorkBtn" type="button">Complete Work</button>
+            <button class="btn" id="clearBtn" type="button">Clear Form</button>
+          </div>
               <option value="low">Low</option>
               <option value="medium" selected>Medium</option>
               <option value="emergency">Emergency</option>
@@ -50,6 +93,7 @@
       </section>
 
       <section class="panel" aria-labelledby="active-orders-title">
+        <h2 id="active-orders-title">Saved Work Orders</h2>
         <h2 id="active-orders-title">Active Work Orders</h2>
         <div id="ordersList" class="orders-list" aria-live="polite"></div>
       </section>
