@@ -1,63 +1,67 @@
-# AI-MAINTENANCE-PLATFORM-
+# Byron Work Log (v1)
 
-Phase 1.1 mobile-first field technician prototype for maintenance work orders.
-A simple mobile-first maintenance workflow app for tracking active work orders.
+A simple, **Termux-friendly** Python command-line app for apartment maintenance technicians to log daily work orders.
+
+This tool stores logs in Android shared storage so entries are easy to review later and manually enter into Yardi.
 
 ## Features
 
-- Dark mode, glove-friendly UI designed for Samsung Galaxy-sized phones.
-- LocalStorage persistence: saved work orders remain after refresh/browser restart.
-- Full Phase 1.1 work order fields including status, priority, category, descriptions, tech notes, timestamps, and labor hours.
-- Status options: New, In Progress, Scheduled, On Hold, Parts Ordered, Reassigned, Canceled, Completed.
-- Priority options: Scheduled, Urgent, Resident, Turn.
-- Property autofill for Property Number `466`:
-  - River Roads Manor
-  - 2380 Grand River Road, Jennings, MO
-- Start Work button to record actual start datetime.
-- Complete Work button to record finish datetime, set status to Completed, and calculate total labor hours.
-- Mobile-friendly saved order list with open/edit/save/delete actions.
+- Runs locally with Python: `python worklog.py`
+- No external dependencies
+- Saves daily logs in:
+  - `~/storage/shared/ByronWorkLogs/`
+- Auto-creates the folder if it doesn't exist
+- Creates daily text logs named:
+  - `YYYY-MM-DD_worklog.txt`
+- Appends every entry to:
+  - `worklog_master.csv`
+- Simple menu:
+  1. Add new work log entry
+  2. View today's log
+  3. Export today's summary
+  4. Exit
 
-## Run locally
+## Termux Setup
 
-- Home screen shows active work orders.
-- Create work orders with:
-  - issue title
-  - apartment number
-  - priority (low, medium, emergency)
-  - notes
-  - photo upload button
-- Add quick notes to any active work order.
-- Mark work orders complete.
-- Includes fake sample maintenance data for testing.
+1. Install Python in Termux:
 
-## Run locally
+   ```bash
+   pkg update
+   pkg install python
+   ```
 
-This app is static HTML/CSS/JS, so you can run it with any local web server.
+2. Allow Termux storage access (required for shared storage path):
 
-### Option 1: Python
+   ```bash
+   termux-setup-storage
+   ```
 
-```bash
-python3 -m http.server 8080
-```
+3. Place this project folder anywhere in Termux, then run:
 
-Open `http://localhost:8080` in your browser.
+   ```bash
+   python worklog.py
+   ```
 
-## Files
+## Usage
 
-- `index.html` – form and list UI.
-- `styles.css` – dark mobile styling.
-- `app.js` – localStorage, property autofill, and work-order time tracking logic.
-Then open:
+From the menu:
 
-- `http://localhost:8080`
+- Choose `1` to add a new work log entry.
+- Answer prompts one question at a time.
+- Press Enter to leave optional fields blank.
+- Choose `2` to view today's log file in the terminal.
+- Choose `3` to export today's summary file.
+- Choose `4` to exit.
 
-### Option 2: VS Code Live Server
+## Files Created
 
-- Open the project in VS Code.
-- Start **Live Server** on `index.html`.
+Inside `~/storage/shared/ByronWorkLogs/`:
 
-## Files
+- `YYYY-MM-DD_worklog.txt` (daily text entries)
+- `worklog_master.csv` (all entries in one CSV)
+- `YYYY-MM-DD_summary.txt` (exported summary for the day)
 
-- `index.html` – app layout and form.
-- `styles.css` – dark mode and mobile-friendly styling.
-- `app.js` – work order logic and sample data.
+## Notes
+
+- This is intentionally **Version 1**: simple and reliable.
+- No cloud sync, AI features, database, Yardi integration, login, or voice tools included.
